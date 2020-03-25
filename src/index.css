@@ -19,6 +19,7 @@ body {
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
   background: #101010;
+  color: rgb(0, 232, 104);
 }
 body,
 input,
