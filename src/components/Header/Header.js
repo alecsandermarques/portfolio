@@ -14,16 +14,13 @@ export default function Header() {
       </label>
       <ul className="menu">
         <li>
-          <a href="#work">Our Work</a>
+          <a href="#home">HOME</a>
         </li>
         <li>
-          <a href="#about">About</a>
+          <a href="#about-me">ABOUT ME</a>
         </li>
         <li>
-          <a href="#careers">Careers</a>
-        </li>
-        <li>
-          <a href="#contact">Contact</a>
+          <a href="#skills">SKILLS</a>
         </li>
       </ul>
     </header>
