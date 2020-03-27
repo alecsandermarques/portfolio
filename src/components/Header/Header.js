@@ -19,9 +19,6 @@ export default function Header() {
         <li>
           <a href="#about-me">ABOUT ME</a>
         </li>
-        <li>
-          <a href="#skills">SKILLS</a>
-        </li>
       </ul>
     </header>
   );
