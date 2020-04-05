@@ -1,148 +1,112 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  List,
-  ListItem,
-  withStyles,
-  Grid,
-  SwipeableDrawer,
-} from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import HomeIcon from '@material-ui/icons/Home';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import MenuIcon from '@material-ui/icons/Menu';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
-const styleSheet = {
-  list: {
-    width: 200,
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
   },
-  padding: {
-    paddingRight: 30,
-    cursor: 'pointer',
+  menuButton: {
+    marginRight: theme.spacing(2),
   },
-  sideBarIcon: {
-    padding: 0,
-    cursor: 'pointer',
+  title: {
+    flexGrow: 1,
   },
-};
+}));
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { drawerActivate: false, drawer: false };
-    this.createDrawer = this.createDrawer.bind(this);
-    this.destroyDrawer = this.destroyDrawer.bind(this);
-  }
+const Header = () => {
+  const classes = useStyles();
+  const history = useHistory();
 
-  componentWillMount() {
-    if (window.innerWidth <= 600) {
-      this.setState({ drawerActivate: true });
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event &&
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
     }
 
-    window.addEventListener('resize', () => {
-      if (window.innerWidth <= 600) {
-        this.setState({ drawerActivate: true });
-      } else {
-        this.setState({ drawerActivate: false });
-      }
-    });
-  }
+    setIsDrawerOpen(open);
+  };
 
-  //Small Screens
-  createDrawer() {
-    return (
-      <div>
-        <AppBar>
+  const handleMenuClick = (item) => history.replace({ pathname: item.path });
+
+  const menuItems = [
+    { title: 'Início', icon: <HomeIcon />, path: '/' },
+    { title: 'Sobre', icon: <LibraryBooksIcon />, path: '/about' },
+    { title: 'Artigos', icon: <AssignmentIndIcon />, path: '/articles' },
+  ];
+
+  const menuToolbar = menuItems.map((item) => (
+    <Button
+      key={item.title}
+      color="inherit"
+      onClick={() => handleMenuClick(item)}
+    >
+      {item.title}
+    </Button>
+  ));
+
+  const menuDrawer = menuItems.map((item) => (
+    <ListItem button key={item.title} onClick={() => handleMenuClick(item)}>
+      <ListItemIcon>{item.icon}</ListItemIcon>
+      <ListItemText primary={item.title} />
+    </ListItem>
+  ));
+
+  return (
+    <>
+      <div className={classes.root}>
+        <AppBar position="static">
           <Toolbar>
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-            >
-              <MenuIcon
-                className={this.props.classes.sideBarIcon}
-                onClick={() => {
-                  this.setState({ drawer: true });
-                }}
-              />
-
-              <Typography color="inherit">Title</Typography>
-              <Typography color="inherit" />
-            </Grid>
+            <Hidden smUp implementation="css">
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="menu"
+                onClick={toggleDrawer(true)}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+            <Typography variant="h6" className={classes.title}>
+              Alecsander Marques
+            </Typography>
+            <Hidden xsDown implementation="css">
+              {menuToolbar}
+            </Hidden>
           </Toolbar>
         </AppBar>
-
-        <SwipeableDrawer
-          open={this.state.drawer}
-          onClose={() => {
-            this.setState({ drawer: false });
-          }}
-          onOpen={() => {
-            this.setState({ drawer: true });
-          }}
-        >
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={() => {
-              this.setState({ drawer: false });
-            }}
-            onKeyDown={() => {
-              this.setState({ drawer: false });
-            }}
-          >
-            <List className={this.props.classes.list}>
-              <ListItem key={1} button divider>
-                Option 1
-              </ListItem>
-              <ListItem key={2} button divider>
-                Option 2
-              </ListItem>
-              <ListItem key={3} button divider>
-                Option 3
-              </ListItem>
-            </List>
-          </div>
-        </SwipeableDrawer>
       </div>
-    );
-  }
-
-  //Larger Screens
-  destroyDrawer() {
-    const { classes } = this.props;
-    return (
-      <AppBar>
-        <Toolbar>
-          <Typography style={{ flexGrow: 1 }} color="inherit">
-            Title
-          </Typography>
-          <Typography className={classes.padding} color="inherit">
-            OPTION 1
-          </Typography>
-          <Typography className={classes.padding} color="inherit">
-            OPTION 2
-          </Typography>
-          <Typography className={classes.padding} color="inherit">
-            OPTION 3
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    );
-  }
-
-  render() {
-    return (
-      <div>
-        {this.state.drawerActivate ? this.createDrawer() : this.destroyDrawer()}
-      </div>
-    );
-  }
-}
-
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
+      <SwipeableDrawer
+        anchor="left"
+        open={isDrawerOpen}
+        onClose={toggleDrawer(false)}
+        onOpen={toggleDrawer(true)}
+      >
+        <List>{menuDrawer}</List>
+      </SwipeableDrawer>
+    </>
+  );
 };
 
-export default withStyles(styleSheet)(Header);
+export default Header;

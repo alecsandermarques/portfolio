@@ -1,28 +1,28 @@
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
-import { FaFreeCodeCamp, FaGithub, FaLinkedin } from 'react-icons/fa';
-import './Home.css';
-import profile from '../../assets/profile.jpeg';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    minHeight: '80vh',
+  },
+}));
 
 export default function Home() {
-  // import logo from '../../assets/logo.png';
-  // <img src={logo} alt="logo" />
+  const classes = useStyles();
 
   return (
-    <div className="container">
-      <div className="element">
-        <div className="box">
-          <img src={profile} alt="profile" />
-          <h1>Alecsander Marques</h1>
-          <div className="description">
-            <h3>Software Developer</h3>
-            <div className="icons">
-              <FaGithub size={32} />
-              <FaFreeCodeCamp size={32} />
-              <FaLinkedin size={32} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justify="center"
+      className={classes.root}
+    >
+      <Grid item xs={3}>
+        <h1>Home</h1>
+      </Grid>
+    </Grid>
   );
 }

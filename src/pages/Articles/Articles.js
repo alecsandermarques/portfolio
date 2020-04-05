@@ -8,7 +8,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function NotFound() {
+export default function Articles() {
   const classes = useStyles();
 
   return (
@@ -21,7 +21,7 @@ export default function NotFound() {
       className={classes.root}
     >
       <Grid item xs={3}>
-        <h1>Not Found</h1>
+        <h1>Articles</h1>
       </Grid>
     </Grid>
   );

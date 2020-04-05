@@ -1,5 +1,28 @@
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
-const About = () => <h1>About</h1>;
+const useStyles = makeStyles(() => ({
+  root: {
+    minHeight: '80vh',
+  },
+}));
 
-export default About;
+export default function About() {
+  const classes = useStyles();
+
+  return (
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justify="center"
+      className={classes.root}
+    >
+      <Grid item xs={3}>
+        <h1>About</h1>
+      </Grid>
+    </Grid>
+  );
+}
