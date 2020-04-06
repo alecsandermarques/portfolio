@@ -1,18 +1,24 @@
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
+import profileImg from '../../assets/profile.png';
 
 const useStyles = makeStyles(() => ({
   root: {
     minHeight: '80vh',
   },
-  container: {},
+  container: {
+    width: '100%',
+    padding: '0 24px',
+  },
 }));
 
 export default function Home() {
   const classes = useStyles();
+
+  const title = 'Alecsander Marques';
+  const subtitle = 'Software Developer';
+  const description = 'Node.js, React & Angular';
 
   return (
     <Grid
@@ -23,14 +29,20 @@ export default function Home() {
       justify="center"
       className={classes.root}
     >
-      <Grid item xs={3}>
-        <div className={classes.container}>
-          <Paper className={classes.paper}>
-            <Typography>
-              Almost before we knew it, we had left the ground.
-            </Typography>
-          </Paper>
-        </div>
+      <Grid item className={classes.container}>
+        <Grid container>
+          <Grid item xs={8}>
+            <img src={profileImg} alt="Profile" />
+          </Grid>
+
+          <Grid item xs={4}>
+            <div>
+              <span>{title}</span>
+              <span>{subtitle}</span>
+              <span>{description}</span>
+            </div>
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );

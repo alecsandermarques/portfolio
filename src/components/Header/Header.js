@@ -98,7 +98,7 @@ const Header = () => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar elevation={0} position="static">
           <Toolbar>
             <Hidden smUp implementation="css">
               <IconButton

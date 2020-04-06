@@ -60,6 +60,21 @@ const theme = createMuiTheme({
         a: {
           textDecoration: 'none',
         },
+        '::-webkit-scrollbar': {
+          width: 8,
+        },
+        '::-webkit-scrollbar-track': {
+          background: '#C3C3C3',
+        },
+        '::-webkit-scrollbar-thumb': {
+          background: '#F5BA4A',
+        },
+        '::-webkit-scrollbar-thumb:hover': {
+          background: '#FFCD6E',
+        },
+        '::-webkit-scrollbar-thumb:window-inactive': {
+          background: '#FFDC9A',
+        },
       },
     },
   },
