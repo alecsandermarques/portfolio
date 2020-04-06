@@ -26,12 +26,21 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    cursor: 'pointer',
+    '&:hover': {
+      '& > span': {
+        color: theme.palette.common.yellow,
+      },
+    },
   },
   navLink: {
-    fontWeight: 'bold',
     color: theme.palette.secondary.main,
-    fontSize: 16,
+    fontFamily: 'Muli',
+    fontWeight: 500,
+    lineHeight: 1.6,
+    fontSize: '1.25rem',
     marginLeft: 20,
+    transition: '0.4s',
     '&:hover': {
       color: theme.palette.common.yellow,
     },
@@ -74,7 +83,6 @@ const Header = () => {
       activeStyle={{ color: theme.palette.common.yellow }}
       to={item.path}
       key={item.title}
-      onClick={() => handleMenuClick(item)}
     >
       {item.title}
     </NavLink>
@@ -107,8 +115,9 @@ const Header = () => {
               color="secondary"
               variant="h6"
               className={classes.title}
+              onClick={() => handleMenuClick(menuItems[0])}
             >
-              Alecsander Marques
+              <span>A.</span> Marques
             </Typography>
             <Hidden xsDown implementation="css">
               {menuToolbar}
