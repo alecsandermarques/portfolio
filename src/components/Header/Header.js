@@ -1,5 +1,5 @@
+import { useTheme } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
@@ -15,7 +15,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import MenuIcon from '@material-ui/icons/Menu';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,10 +27,20 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  navLink: {
+    fontWeight: 'bold',
+    color: theme.palette.secondary.main,
+    fontSize: 16,
+    marginLeft: 20,
+    '&:hover': {
+      color: theme.palette.common.yellow,
+    },
+  },
 }));
 
 const Header = () => {
   const classes = useStyles();
+  const theme = useTheme();
   const history = useHistory();
 
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -47,22 +57,27 @@ const Header = () => {
     setIsDrawerOpen(open);
   };
 
-  const handleMenuClick = (item) => history.replace({ pathname: item.path });
+  const handleMenuClick = (item) => {
+    history.replace({ pathname: item.path });
+    setIsDrawerOpen(false);
+  };
 
   const menuItems = [
-    { title: 'Início', icon: <HomeIcon />, path: '/' },
+    { title: 'Início', icon: <HomeIcon />, path: '/home' },
     { title: 'Sobre', icon: <LibraryBooksIcon />, path: '/about' },
     { title: 'Artigos', icon: <AssignmentIndIcon />, path: '/articles' },
   ];
 
   const menuToolbar = menuItems.map((item) => (
-    <Button
+    <NavLink
+      className={classes.navLink}
+      activeStyle={{ color: theme.palette.common.yellow }}
+      to={item.path}
       key={item.title}
-      color="inherit"
       onClick={() => handleMenuClick(item)}
     >
       {item.title}
-    </Button>
+    </NavLink>
   ));
 
   const menuDrawer = menuItems.map((item) => (
@@ -81,14 +96,18 @@ const Header = () => {
               <IconButton
                 edge="start"
                 className={classes.menuButton}
-                color="inherit"
+                color="secondary"
                 aria-label="menu"
                 onClick={toggleDrawer(true)}
               >
                 <MenuIcon />
               </IconButton>
             </Hidden>
-            <Typography variant="h6" className={classes.title}>
+            <Typography
+              color="secondary"
+              variant="h6"
+              className={classes.title}
+            >
               Alecsander Marques
             </Typography>
             <Hidden xsDown implementation="css">
