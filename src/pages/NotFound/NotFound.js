@@ -21,7 +21,7 @@ export default function NotFound() {
       className={classes.root}
     >
       <Grid item xs={3}>
-        <h1>Not Found</h1>
+        <h1>Página não encontrada</h1>
       </Grid>
     </Grid>
   );
