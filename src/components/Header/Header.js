@@ -28,10 +28,11 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     cursor: 'pointer',
     '&:hover': {
-      '& > span': {
-        color: theme.palette.common.yellow,
-      },
+      color: theme.palette.common.yellow,
     },
+  },
+  spanTitle: {
+    color: theme.palette.common.yellow,
   },
   navLink: {
     color: theme.palette.secondary.main,
@@ -117,7 +118,7 @@ const Header = () => {
               className={classes.title}
               onClick={() => handleMenuClick(menuItems[0])}
             >
-              <span>A.</span> Marques
+              <span className={classes.spanTitle}>A.</span> Marques
             </Typography>
             <Hidden xsDown implementation="css">
               {menuToolbar}

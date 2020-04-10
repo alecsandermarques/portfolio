@@ -77,6 +77,7 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiDivider: { middle: { marginLeft: 0, marginRight: 0 } },
   },
 });
 
