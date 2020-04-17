@@ -7,6 +7,8 @@ import { FaGithubSquare, FaLinkedin, FaWhatsappSquare } from 'react-icons/fa';
 import profileImg from '../../assets/profile.png';
 import Footer from '../../components/Footer/Footer';
 
+// aefuhaeufah
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: '91vh',
